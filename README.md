@@ -1,10 +1,10 @@
 # vue_traffic-light
 
-## Project _setup_
+## Project _`setup`_
 ```
 npm install
 ```
 
-### Project _start_ with hot-reloads for development
+### Project _`start`_ for development
 ```
 npm start
