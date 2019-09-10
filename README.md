@@ -5,6 +5,6 @@
 npm install
 ```
 
-### Project _`start`_ for development
+## Project _`start`_ for development
 ```
 npm start
