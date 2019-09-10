@@ -1,12 +1,22 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/1">Red</router-link> |
+      <router-link to="/2">Yellow</router-link> |
+      <router-link to="/3">Green</router-link>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+  export default {
+    mounted() {
+      this.$router.push({ path: '/1' });
+    }
+  }
+
+</script>
 
 <style>
 #app {
