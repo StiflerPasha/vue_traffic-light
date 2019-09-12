@@ -1,16 +1,20 @@
 <template>
   <div class="lights">
     <div class="light red"
-         v-bind:class="{active: this.fire === 'red'}"></div>
-    <div class="light yellow"
-         v-bind:class="{active: this.fire === 'yellow'}">
+         v-bind:class="{
+         active: this.fire === 'red',
+         blink: this.fire === 'red' && counter <= 3
+         }"></div>
+    <div class="light yellow" v-bind:class="{active: this.fire === 'yellow'}">
       <pre class='timer'
-           @click="countDown"
            v-bind:style="{color: this.fire}"
            v-if="this.fire !== 'yellow'">{{counter}}</pre>
     </div>
     <div class="light green"
-         v-bind:class="{active: this.fire === 'green'}"></div>
+         v-bind:class="{
+         active: this.fire === 'green',
+         blink: this.fire === 'green' && counter <= 3
+         }"></div>
   </div>
 </template>
 
@@ -31,18 +35,21 @@
 				  this.countDown();
 			   }, 1000);
 			} else {
-			   //this.$router.afterEach((to, from, next) => console.log(from));
 			   switch (this.$route.name) {
 				  case 'red': {
 					 this.$router.push({ name: 'yellow' });
 					 break;
 				  }
 				  case 'yellow': {
-					 this.$router.push({ name: 'green' });
+					 if (localStorage.getItem('LAST_FIRE') === 'green') {
+						this.$router.push({ name: 'red' });
+					 } else {
+						this.$router.push({ name: 'green' });
+					 }
 					 break;
 				  }
 				  case 'green': {
-					 this.$router.push({ name: 'red' });
+					 this.$router.push({ name: 'yellow' });
 					 break;
 				  }
 				  default:
@@ -100,4 +107,18 @@
     font-size: 4em;
     font-weight: bolder;
   }
+
+  .blink {
+    animation: blink 1s linear infinite;
+  }
+
+  @keyframes blink {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.25;
+    }
+  }
 </style>
+
